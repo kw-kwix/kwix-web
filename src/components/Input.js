@@ -17,7 +17,7 @@ export function Input() {
 										<div className="form-outline">
 											<label
 												className="form-label"
-												for="Name"
+												htmlFor="Name"
 											>
 												나이
 											</label>
@@ -45,7 +45,7 @@ export function Input() {
 											/>
 											<label
 												className="form-check-label"
-												for="maleGender"
+												htmlFor="maleGender"
 											>
 												남자
 											</label>
@@ -61,7 +61,7 @@ export function Input() {
 											/>
 											<label
 												className="form-check-label"
-												for="femaleGender"
+												htmlFor="femaleGender"
 											>
 												여자
 											</label>
@@ -74,7 +74,7 @@ export function Input() {
 										<div className="form-outline">
 											<label
 												className="form-label"
-												for="id_"
+												htmlFor="id_"
 											>
 												키
 											</label>
@@ -92,7 +92,7 @@ export function Input() {
 										<div className="form-outline">
 											<label
 												className="form-label"
-												for="password"
+												htmlFor="password"
 											>
 												몸무게
 											</label>
@@ -140,7 +140,7 @@ export function Input() {
 														name="chest"
 														checked
 													/>
-													<label for="chest">
+													<label htmlFor="chest">
 														가슴
 													</label>
 												</div>
@@ -152,7 +152,7 @@ export function Input() {
 														name="shoulder"
 														checked
 													/>
-													<label for="shoulder">
+													<label htmlFor="shoulder">
 														어깨
 													</label>
 												</div>
@@ -163,7 +163,7 @@ export function Input() {
 														id="lowerbody"
 														name="lowerbody"
 													/>
-													<label for="lowerbody">
+													<label htmlFor="lowerbody">
 														하체
 													</label>
 												</div>
