@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 
-import "./bootstrap.css";
 import "./styles.css";
 
 import { Home } from "./Home";
