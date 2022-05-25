@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Input() {
 	return (
 		<div className="container py-5 h-100">
@@ -176,10 +178,8 @@ export function Input() {
 									<button
 										className="w-50 btn btn-lg btn-primary"
 										type="button"
-										onclick="location.href='recommend.html'"
 									>
-										{" "}
-										입력
+										<Link to="/recommend">입력</Link>
 									</button>
 								</div>
 							</form>

@@ -11,6 +11,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
 import { SignUp } from "./SignUp";
+import { Recommend } from "./Recommend";
 
 export function Main() {
 	return (
@@ -24,6 +25,7 @@ export function Main() {
 					<Route path="/input" element={<Input />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<SignUp />} />
+					<Route path="/recommend" element={<Recommend />} />
 				</Routes>
 			</div>
 
