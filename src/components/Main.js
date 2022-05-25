@@ -10,6 +10,7 @@ import { Login } from "./Login";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Nav } from "./Nav";
+import { SignUp } from "./SignUp";
 
 export function Main() {
 	return (
@@ -22,6 +23,7 @@ export function Main() {
 					<Route path="/" element={<Home />} />
 					<Route path="/input" element={<Input />} />
 					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<SignUp />} />
 				</Routes>
 			</div>
 
