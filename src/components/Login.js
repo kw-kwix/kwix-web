@@ -9,6 +9,7 @@ export function Login() {
 	});
 
 	const handleSubmit = (event) => {
+		event.preventDefault()
 		axios
 			.post("http://localhost:5000/login", formValue)
 			.then((x) => console.log(x));
