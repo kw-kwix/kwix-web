@@ -1,11 +1,34 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
+import React from "react";
 
 export function Login() {
+	const [formValue, setformValue] = React.useState({
+		email: "",
+		password: "",
+	});
+
+	const handleSubmit = (event) => {
+		axios
+			.post("http://localhost:5000/login", formValue)
+			.then((x) => console.log(x));
+	};
+
+	const handleChange = (event) => {
+		setformValue({
+			...formValue,
+			[event.target.name]: event.target.value,
+		});
+	};
+
 	return (
 		<div className="container">
 			<div className="row align-items-center g-lg-5 py-5">
 				<div className="col-md-10 mx-auto col-lg-5">
-					<form className="p-4 p-md-5 border rounded-3 bg-light">
+					<form
+						className="p-4 p-md-5 border rounded-3 bg-light"
+						onSubmit={handleSubmit}
+					>
 						<div className="form-floating mb-3">
 							<label htmlFor="floatingInput">이메일 주소</label>
 							<input
@@ -13,6 +36,9 @@ export function Login() {
 								className="form-control"
 								id="floatingInput"
 								placeholder="name@example.com"
+								name="email"
+								value={formValue.email}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="form-floating mb-3">
@@ -22,6 +48,9 @@ export function Login() {
 								className="form-control"
 								id="floatingPassword"
 								placeholder="Password"
+								name="password"
+								value={formValue.password}
+								onChange={handleChange}
 							/>
 						</div>
 						<div className="checkbox mb-3">
