@@ -1,4 +1,38 @@
+import axios from "axios";
+import React from "react";
+
 export function SignUp() {
+	const [formValue, setformValue] = React.useState({
+		name: "",
+		birthdayDate: "",
+		sex: 1,
+		id: "",
+		password: "",
+		email: "",
+		phoneNumber: "",
+	});
+
+	const handleSubmit = (event) => {
+		console.log(formValue);
+		axios
+			.post("http://localhost:5000/sign_up", formValue)
+			.then((x) => console.log(x));
+	};
+
+	const handleChange = (event) => {
+		event.preventDefault()
+		console.log(event.target.value);
+		let value = event.target.value;
+		if (event.target.name === "sex") {
+			value = parseInt(event.target.value, 10);
+		}
+		setformValue({
+			...formValue,
+			[event.target.name]: value,
+		});
+		console.log(formValue);
+	};
+
 	return (
 		<div class="container py-5 h-100">
 			<div class="row justify-content-center align-items-center h-100">
@@ -11,7 +45,7 @@ export function SignUp() {
 							<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">
 								회원가입 정보 입력
 							</h3>
-							<form>
+							<form onSubmit={handleSubmit}>
 								<div class="row">
 									<div class="col-md-6 mb-4">
 										<div class="form-outline">
@@ -25,6 +59,9 @@ export function SignUp() {
 												type="text"
 												id="Name"
 												class="form-control form-control-lg"
+												name="name"
+												value={formValue.name}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -43,6 +80,9 @@ export function SignUp() {
 												type="text"
 												class="form-control form-control-lg"
 												id="birthdayDate"
+												name="birthdayDate"
+												value={formValue.birthdayDate}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -53,10 +93,11 @@ export function SignUp() {
 											<input
 												class="form-check-input"
 												type="radio"
-												name="inlineRadioOptions"
+												name="sex"
 												id="maleGender"
-												value="option1"
-												checked
+												checked={formValue.sex === 1}
+												value={1}
+												onChange={handleChange}
 											/>
 											<label
 												class="form-check-label"
@@ -70,9 +111,11 @@ export function SignUp() {
 											<input
 												class="form-check-input"
 												type="radio"
-												name="inlineRadioOptions"
+												name="sex"
 												id="femaleGender"
-												value="option2"
+												checked={formValue.sex === 0}
+												value={0}
+												onChange={handleChange}
 											/>
 											<label
 												class="form-check-label"
@@ -87,13 +130,19 @@ export function SignUp() {
 								<div class="row">
 									<div class="col-md-6 mb-4">
 										<div class="form-outline">
-											<label class="form-label" for="id_">
+											<label
+												class="form-label"
+												for="id_"
+											>
 												아이디
 											</label>
 											<input
 												type="text"
 												id="id_"
 												class="form-control form-control-lg"
+												name="id"
+												value={formValue.id}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -112,6 +161,9 @@ export function SignUp() {
 												type="text"
 												id="password"
 												class="form-control form-control-lg"
+												name="password"
+												value={formValue.password}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -130,6 +182,9 @@ export function SignUp() {
 												type="email"
 												id="emailAddress"
 												class="form-control form-control-lg"
+												name="email"
+												value={formValue.email}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -145,6 +200,9 @@ export function SignUp() {
 												type="tel"
 												id="phoneNumber"
 												class="form-control form-control-lg"
+												name="phoneNumber"
+												value={formValue.phoneNumber}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
