@@ -8,11 +8,18 @@ export function Login() {
 		password: "",
 	});
 
-	const handleSubmit = (event) => {
-		event.preventDefault()
-		axios
-			.post("http://localhost:5000/login", formValue)
-			.then((x) => console.log(x));
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			const res = await axios.post(
+				"http://localhost:5000/login",
+				formValue
+			);
+			alert(res.data.message);
+			localStorage.setItem("kwixUser", formValue.email);
+		} catch (error) {
+			alert(error.response.data.message);
+		}
 	};
 
 	const handleChange = (event) => {
