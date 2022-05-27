@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
+import { observer } from "mobx-react";
 
-export function Login() {
+export const Login = observer(({ auth }) => {
+	const navigate = useNavigate();
 	const [formValue, setformValue] = React.useState({
 		email: "",
 		password: "",
@@ -16,7 +18,8 @@ export function Login() {
 				formValue
 			);
 			alert(res.data.message);
-			localStorage.setItem("kwixUser", formValue.email);
+			auth.login(formValue.email);
+			navigate("/");
 		} catch (error) {
 			alert(error.response.data.message);
 		}
@@ -91,4 +94,4 @@ export function Login() {
 			</div>
 		</div>
 	);
-}
+});

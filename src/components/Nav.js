@@ -1,6 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import axios from "axios";
+import { observer } from "mobx-react";
 
-export function Nav() {
+export const Nav = observer(({ auth }) => {
+	const navigate = useNavigate();
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			const res = await axios.get("http://localhost:5000/logout");
+			alert(res.data.message);
+			navigate("/");
+			auth.logout();
+		} catch (error) {
+			alert(error.response.data.message);
+		}
+	};
+	let button;
+	if (auth.isAuth) {
+		button = (
+			<Link
+				to="/"
+				className="nav-link page-scroll"
+				onClick={handleSubmit}
+			>
+				logout
+			</Link>
+		);
+	} else {
+		button = (
+			<Link to="/login" className="nav-link page-scroll">
+				login
+			</Link>
+		);
+	}
+
 	return (
 		<nav className="navbar navbar-expand-lg fixed-top navbar-dark">
 			<div className="container">
@@ -34,11 +69,7 @@ export function Nav() {
 							</a>
 						</li>
 
-						<li className="nav-item">
-							<Link to="/login" className="nav-link page-scroll">
-								login
-							</Link>
-						</li>
+						<li className="nav-item">{button}</li>
 					</ul>
 					<span className="nav-item social-icons">
 						<span className="fa-stack">
@@ -58,4 +89,4 @@ export function Nav() {
 			</div>
 		</nav>
 	);
-}
+});

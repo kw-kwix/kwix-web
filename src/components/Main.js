@@ -10,18 +10,21 @@ import { Footer } from "./Footer";
 import { Nav } from "./Nav";
 import { SignUp } from "./SignUp";
 import { Recommend } from "./Recommend";
+import { AuthStore } from "../stores/authStore";
+
+const auth = new AuthStore();
 
 export function Main() {
 	return (
 		<div data-spy="scroll" data-target=".fixed-top">
-			<Nav></Nav>
+			<Nav auth={auth}></Nav>
 			<Header></Header>
 
 			<div id="services" className="basic-2">
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/input" element={<Input />} />
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<Login auth={auth} />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/recommend" element={<Recommend />} />
 				</Routes>
