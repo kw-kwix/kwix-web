@@ -1,6 +1,34 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
+import React from "react";
 
 export function Input() {
+	const [formValue, setformValue] = React.useState({
+		age: 0,
+		sex: 1,
+		weight: 0,
+		height: 0,
+	});
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const email = localStorage.getItem("kwixUser");
+		const input = { ...formValue, email };
+		try {
+			const res = await axios.post("http://localhost:5000/input", input);
+			alert(res.data.message);
+		} catch (error) {
+			alert(error.response.data.message);
+		}
+	};
+
+	const handleChange = (event) => {
+		setformValue({
+			...formValue,
+			[event.target.name]: event.target.value,
+		});
+	};
+
 	return (
 		<div className="container py-5 h-100">
 			<div className="row justify-content-center align-items-center h-100">
@@ -13,20 +41,23 @@ export function Input() {
 							<h3 className="mb-4 pb-2 pb-md-0 mb-md-5">
 								운동 추천을 위해서 정보를 입력해주세요.
 							</h3>
-							<form>
+							<form onSubmit={handleSubmit}>
 								<div className="row">
 									<div className="col-md-6 mb-4">
 										<div className="form-outline">
 											<label
 												className="form-label"
-												htmlFor="Name"
+												htmlFor="age"
 											>
 												나이
 											</label>
 											<input
 												type="text"
-												id="Name"
+												id="age"
 												className="form-control form-control-lg"
+												name="age"
+												value={formValue.age}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -40,10 +71,11 @@ export function Input() {
 											<input
 												className="form-check-input"
 												type="radio"
-												name="inlineRadioOptions"
+												name="sex"
 												id="maleGender"
-												value="option1"
-												checked
+												checked={formValue.sex === 1}
+												value={1}
+												onChange={handleChange}
 											/>
 											<label
 												className="form-check-label"
@@ -57,9 +89,11 @@ export function Input() {
 											<input
 												className="form-check-input"
 												type="radio"
-												name="inlineRadioOptions"
+												name="sex"
 												id="femaleGender"
-												value="option2"
+												checked={formValue.sex === 0}
+												value={0}
+												onChange={handleChange}
 											/>
 											<label
 												className="form-check-label"
@@ -84,6 +118,9 @@ export function Input() {
 												type="text"
 												id="id_"
 												className="form-control form-control-lg"
+												name="height"
+												value={formValue.height}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -102,6 +139,9 @@ export function Input() {
 												type="text"
 												id="password"
 												className="form-control form-control-lg"
+												name="weight"
+												value={formValue.weight}
+												onChange={handleChange}
 											/>
 										</div>
 									</div>
@@ -140,7 +180,11 @@ export function Input() {
 														type="checkbox"
 														id="chest"
 														name="chest"
-														checked
+														checked={
+															formValue.sex === 0
+														}
+														value={0}
+														onChange={handleChange}
 													/>
 													<label htmlFor="chest">
 														가슴
@@ -152,7 +196,11 @@ export function Input() {
 														type="checkbox"
 														id="shoulder"
 														name="shoulder"
-														checked
+														checked={
+															formValue.sex === 0
+														}
+														value={1}
+														onChange={handleChange}
 													/>
 													<label htmlFor="shoulder">
 														어깨
@@ -164,6 +212,11 @@ export function Input() {
 														type="checkbox"
 														id="lowerbody"
 														name="lowerbody"
+														checked={
+															formValue.sex === 0
+														}
+														value={2}
+														onChange={handleChange}
 													/>
 													<label htmlFor="lowerbody">
 														하체
@@ -177,9 +230,14 @@ export function Input() {
 								<div className="mt-4 pt-2">
 									<button
 										className="w-50 btn btn-lg btn-primary"
-										type="button"
+										type="submit"
 									>
-										<Link to="/recommend">입력</Link>
+										{/* <Link
+											to="/recommend"
+											className="text-white"
+										> */}
+											입력
+										{/* </Link> */}
 									</button>
 								</div>
 							</form>
