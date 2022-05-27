@@ -80,7 +80,7 @@ export function Login() {
 							className="w-100 btn btn-lg btn-primary"
 							type="button"
 						>
-							<Link to="/signup">회원가입</Link>
+							<Link to="/signup" className="text-white">회원가입</Link>
 						</button>
 						<hr className="my-4" />
 						<small className="text-muted">
