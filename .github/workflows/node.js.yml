@@ -33,6 +33,7 @@ jobs:
     - run: yarn build
       env:
         CI: false
+        PUBLIC_URL: https://${{ github.repository_owner }}.github.io/kw-kwix/
 #     - run: npm test
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4.3.3
