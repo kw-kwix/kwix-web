@@ -70,6 +70,7 @@ export const Nav = observer(({ auth }) => {
 						</li>
 
 						<li className="nav-item">{button}</li>
+						<li className="nav-item">{UserLink(auth.isAuth)}</li>
 					</ul>
 					<span className="nav-item social-icons">
 						<span className="fa-stack">
@@ -90,3 +91,22 @@ export const Nav = observer(({ auth }) => {
 		</nav>
 	);
 });
+
+/**
+ *
+ * @param {boolean} isAuth
+ * @returns
+ */
+const UserLink = (isAuth) => {
+	if (isAuth) {
+		return (
+			<div>
+				<Link to="/user" className="nav-link page-scroll">
+					User
+				</Link>
+			</div>
+		);
+	}
+
+	return;
+};
