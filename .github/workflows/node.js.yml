@@ -28,4 +28,6 @@ jobs:
         cache: 'yarn'
     - run: yarn
     - run: yarn build
+      env:
+        CI: false
 #     - run: npm test
