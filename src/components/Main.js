@@ -11,6 +11,7 @@ import { Nav } from "./Nav";
 import { SignUp } from "./SignUp";
 import { Recommend } from "./Recommend";
 import { AuthStore } from "../stores/authStore";
+import { User } from "./User";
 
 const auth = new AuthStore();
 
@@ -27,6 +28,7 @@ export function Main() {
 					<Route path="/login" element={<Login auth={auth} />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/recommend" element={<Recommend />} />
+					<Route path="/user" element={<User auth={auth} />} />
 				</Routes>
 			</div>
 
