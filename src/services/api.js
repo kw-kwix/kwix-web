@@ -7,6 +7,8 @@ api.defaults.baseURL =
 		? process.env.SERVER_URL
 		: "http://localhost:5000";
 
+console.log(api.defaults.baseURL);
+
 /**
  *
  * @param {string} email
