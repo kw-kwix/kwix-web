@@ -1,4 +1,15 @@
+import React from "react";
+import { recommend } from "../services/api";
+
 export function Recommend() {
+	React.useEffect(() => {
+		const email = localStorage.getItem("kwixUser");
+		recommend(email)
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((res) => alert(res));
+	}, []);
 	return (
 		<div>
 			<div className="container">
