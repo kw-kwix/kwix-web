@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import React from "react";
 import { observer } from "mobx-react";
+import { login } from "../services/api";
 
 export const Login = observer(({ auth }) => {
 	const navigate = useNavigate();
@@ -13,10 +13,7 @@ export const Login = observer(({ auth }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await axios.post(
-				"http://localhost:5000/login",
-				formValue
-			);
+			const res = await login(formValue);
 			alert(res.data.message);
 			auth.login(formValue.email);
 			navigate("/");

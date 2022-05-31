@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import { signUp } from "../services/api";
 
 export function SignUp() {
 	const [formValue, setformValue] = React.useState({
@@ -15,10 +15,7 @@ export function SignUp() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await axios.post(
-				"http://localhost:5000/sign_up",
-				formValue
-			);
+			const res = await signUp(formValue);
 			alert(res.data.message);
 		} catch (error) {
 			alert(error.response.data.message);

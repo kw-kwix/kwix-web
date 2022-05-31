@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import axios from "axios";
 import { observer } from "mobx-react";
+import { logout } from "../services/api";
 
 export const Nav = observer(({ auth }) => {
 	const navigate = useNavigate();
@@ -9,7 +9,7 @@ export const Nav = observer(({ auth }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await axios.get("http://localhost:5000/logout");
+			const res = await logout();
 			alert(res.data.message);
 			navigate("/");
 			auth.logout();
