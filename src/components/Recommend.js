@@ -14,6 +14,11 @@ const exerciseCard = (name, imgSrc, num) => {
 				<div className="card-body">
 					<h5 className="card-title">{name}</h5>
 					<p className="card-text"></p>
+					<a
+						href="https://kw-kwix.github.io/pose-detector/"
+						rel="noreferrer"
+						target={"_blank"}
+					>go</a>
 				</div>
 			</div>
 		</div>
