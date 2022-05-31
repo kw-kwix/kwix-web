@@ -1,12 +1,43 @@
 import React from "react";
 import { recommend } from "../services/api";
+import { exerciseList } from "../services/exerciseList";
+
+const exerciseCard = (name, imgSrc, num) => {
+	return (
+		<div className="col" key={num}>
+			<div className="card">
+				<img
+					src={`images/${imgSrc}`}
+					className="card-img-top"
+					alt={name}
+				/>
+				<div className="card-body">
+					<h5 className="card-title">{name}</h5>
+					<p className="card-text"></p>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export function Recommend() {
+	const [cardList, setCardList] = React.useState(null);
 	React.useEffect(() => {
 		const email = localStorage.getItem("kwixUser");
 		recommend(email)
 			.then((res) => {
-				console.log(res.data);
+				for (const key in res.data.result) {
+					if (Object.hasOwnProperty.call(res.data.result, key)) {
+						exerciseList[key]["score"] = res.data.result[key];
+					}
+				}
+				const result = exerciseList.sort((a, b) => b.score - a.score);
+				console.log(result);
+				setCardList(
+					[...Array(6).keys()].map((i) =>
+						exerciseCard(result[i].name, result[i].imgSrc, i)
+					)
+				);
 			})
 			.catch((res) => alert(res));
 	}, []);
@@ -17,84 +48,7 @@ export function Recommend() {
 			</div>
 			<div className="container">
 				<div className="row row-cols-1 row-cols-md-3 g-4">
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex1 babel squat.png"
-								className="card-img-top"
-								alt="Babel squat"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Babel squat</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex2 dumbbell curl.png"
-								className="card-img-top"
-								alt="Dumbbell curl"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Dumbbell curl</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex3 lying leg raise.png"
-								className="card-img-top"
-								alt="Lying leg raise"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Lying leg raise</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex4 side lateral raise.png"
-								className="card-img-top"
-								alt="Side lateral raise"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Side lateral raise</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex5 side lunge.png"
-								className="card-img-top"
-								alt="Side lunge"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Side lunge</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
-					<div className="col">
-						<div className="card">
-							<img
-								src="images/ex7 standing side crunch.png"
-								className="card-img-top"
-								alt="Standing side crunch"
-							/>
-							<div className="card-body">
-								<h5 className="card-title">Standing side crunch</h5>
-								<p className="card-text"></p>
-							</div>
-						</div>
-					</div>
+					{cardList}
 				</div>
 			</div>
 		</div>
