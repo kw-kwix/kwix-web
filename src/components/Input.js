@@ -1,8 +1,10 @@
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
 
 export function Input() {
+	const navigate = useNavigate();
+
 	const [formValue, setformValue] = React.useState({
 		age: 0,
 		sex: 1,
@@ -17,6 +19,7 @@ export function Input() {
 		try {
 			const res = await axios.post("http://localhost:5000/input", input);
 			alert(res.data.message);
+			navigate("/recommend");
 		} catch (error) {
 			alert(error.response.data.message);
 		}

@@ -1,4 +1,27 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { recommend } from "../services/api";
+
+const StartBtn = () => {
+	const navigate = useNavigate();
+
+	const click = async (event) => {
+		try {
+			const email = localStorage.getItem("kwixUser");
+			await recommend(email);
+			navigate("/recommend");
+		} catch (error) {
+			alert(error.response.data.message);
+			navigate("/input");
+		}
+	};
+
+	return (
+		<button onClick={click} className="btn-solid-lg page-scroll">
+			Start
+		</button>
+	);
+};
 
 export function Header() {
 	return (
@@ -11,12 +34,7 @@ export function Header() {
 								Human activity recognition and recommendation
 								system
 							</h1>
-							<Link
-								to="/input"
-								className="btn-solid-lg page-scroll"
-							>
-								Start
-							</Link>
+							{StartBtn()}
 						</div>
 					</div>
 				</div>
