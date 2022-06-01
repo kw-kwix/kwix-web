@@ -41,3 +41,28 @@ jobs:
       with:
         branch: gh-pages # The branch the action should deploy to.
         folder: build # The folder the action should deploy.
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: web-static-file
+        path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: web-static-file
+          path: dist
+      - name: check file
+        run: ls -R
+      - name: Netlify Deploy
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: './dist'
+          production-deploy: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
