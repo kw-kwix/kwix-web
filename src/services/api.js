@@ -4,7 +4,7 @@ const api = axios.create();
 
 api.defaults.baseURL =
 	process.env.NODE_ENV === "production"
-		? process.env.SERVER_URL
+		? process.env.REACT_APP_SERVER_URL
 		: "http://localhost:5000";
 
 /**
