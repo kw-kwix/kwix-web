@@ -33,14 +33,14 @@ jobs:
     - run: yarn build
       env:
         CI: false
-        PUBLIC_URL: https://${{ github.repository_owner }}.github.io/kwix-web/
+        # PUBLIC_URL: https://${{ github.repository_owner }}.github.io/kwix-web/
         SERVER_URL: ${{ secrets.SERVER_URL }}
 #     - run: npm test
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
-      with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: build # The folder the action should deploy.
+    # - name: Deploy 🚀
+    #   uses: JamesIves/github-pages-deploy-action@v4.3.3
+    #   with:
+    #     branch: gh-pages # The branch the action should deploy to.
+    #     folder: build # The folder the action should deploy.
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
