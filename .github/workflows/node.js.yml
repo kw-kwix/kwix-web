@@ -34,7 +34,7 @@ jobs:
       env:
         CI: false
         # PUBLIC_URL: https://${{ github.repository_owner }}.github.io/kwix-web/
-        SERVER_URL: ${{ secrets.SERVER_URL }}
+        REACT_APP_SERVER_URL: ${{ secrets.SERVER_URL }}
 #     - run: npm test
     # - name: Deploy 🚀
     #   uses: JamesIves/github-pages-deploy-action@v4.3.3
