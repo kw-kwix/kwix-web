@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { observer } from "mobx-react";
-import { login } from "../services/api";
+import { auth as authApi } from "../services/api";
 
 export const Login = observer(({ auth }) => {
 	const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const Login = observer(({ auth }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await login(formValue);
+			const res = await authApi.login(formValue);
 			alert(res.data.message);
 			auth.login(formValue.email);
 			navigate("/");

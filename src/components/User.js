@@ -15,7 +15,7 @@ export const User = observer(({ auth }) => {
 	React.useEffect(() => {
 		if (auth.isAuth) {
 			const email = localStorage.getItem("kwixUser");
-			user(email)
+			user.get(email)
 				.then((res) => {
 					setUserInfo(res.data);
 				})

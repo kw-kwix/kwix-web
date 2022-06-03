@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { editUser } from "../services/api";
+import { user } from "../services/api";
 
 export function Input() {
 	const navigate = useNavigate();
@@ -17,7 +17,7 @@ export function Input() {
 		const email = localStorage.getItem("kwixUser");
 		const input = { ...formValue, email };
 		try {
-			const res = await editUser(input);
+			const res = await user.edit(input);
 			alert(res.data.message);
 			navigate("/recommend");
 		} catch (error) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { signUp } from "../services/api";
+import { user } from "../services/api";
 
 export function SignUp() {
 	const [formValue, setformValue] = React.useState({
@@ -15,7 +15,7 @@ export function SignUp() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await signUp(formValue);
+			const res = await user.register(formValue);
 			alert(res.data.message);
 		} catch (error) {
 			alert(error.response.data.message);
