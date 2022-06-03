@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { observer } from "mobx-react";
-import { logout } from "../services/api";
+import { auth as authApi } from "../services/api";
 
 export const Nav = observer(({ auth }) => {
 	const navigate = useNavigate();
@@ -9,7 +9,7 @@ export const Nav = observer(({ auth }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await logout();
+			const res = await authApi.logout();
 			alert(res.data.message);
 			navigate("/");
 			auth.logout();
