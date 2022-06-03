@@ -12,34 +12,15 @@ api.defaults.baseURL =
  * @param {string} email
  * @returns
  */
-export const user = (email) => api.post("/user", { email });
-
-/**
- *
- * @param {string} email
- * @returns
- */
 export const recommend = (email) => api.post("/recommend", { email });
 
-/**
- *
- * @param {Object} user
- * @returns
- */
-export const editUser = (user) => api.post("/input", user);
+export const auth = {
+	login: (form) => api.post("/login", form),
+	logout: () => api.get("/logout"),
+};
 
-/**
- *
- * @param {Object} form
- * @returns
- */
-export const login = (form) => api.post("/login", form);
-
-export const logout = () => api.get("/logout");
-
-/**
- *
- * @param {Object} form
- * @returns
- */
-export const signUp = (form) => api.post("/sign_up", form);
+export const user = {
+	register: (form) => api.post("/sign_up", form),
+	get: (email) => api.post("/user", { email }),
+	edit: (user) => api.post("/input", user),
+};
