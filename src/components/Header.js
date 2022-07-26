@@ -9,7 +9,8 @@ const StartBtn = () => {
 		try {
 			const email = localStorage.getItem("kwixUser");
 			await recommend(email);
-			navigate("/recommend");
+			navigate("/recommend"); 
+			// 서버 사용을 안할 시 위의 코드 3줄을 comment로 바꾸고 navigate("/input")로 해서 했음
 		} catch (error) {
 			alert(error.response.data.message);
 			navigate("/input");
@@ -31,8 +32,7 @@ export function Header() {
 					<div className="col-lg-6">
 						<div className="text-container">
 							<h1 className="h1-large">
-								Human activity recognition and recommendation
-								system
+								Human activity recognition and recommendation system
 							</h1>
 							{StartBtn()}
 						</div>
