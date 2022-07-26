@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { user } from "../services/api";
+import { useState } from 'react';
+
 
 export function Input() {
 	const navigate = useNavigate();
@@ -11,7 +13,7 @@ export function Input() {
 		weight: 0,
 		height: 0,
 	});
-
+ 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const email = localStorage.getItem("kwixUser");
@@ -24,13 +26,65 @@ export function Input() {
 			alert(error.response.data.message);
 		}
 	};
-
+ 
 	const handleChange = (event) => {
+		event.preventDefault()
+		console.log(event.target.value);
+		let value = event.target.value;
+		if (event.target.name === "sex") {
+			value = parseInt(event.target.value, 10);
+		}
 		setformValue({
 			...formValue,
-			[event.target.name]: event.target.value,
+			[event.target.name]: value,
 		});
+		console.log(formValue);
 	};
+	
+	const Check = () => {
+		const formData=[
+			{id:0, name:"가슴"},
+			{id:1, name:"어깨"},
+			{id:2, name:"하체"},
+		]
+
+		const [isChecked, setIsChecked] = useState(false);
+		const [checkedItems, setCheckedItems] = useState(new Set());
+
+		const checkHandler = ({ target }) => {
+			setIsChecked(!isChecked);
+			checkedItemHandler(target.parentNode, target.value, target.checked);
+		};
+
+		const checkedItemHandler = (box, id, isChecked) => {
+			if (isChecked) {
+				checkedItems.add(id);
+				setCheckedItems(checkedItems);
+				box.style.backgroundColor = "#F6CB44";
+			} else if (!isChecked && checkedItems.has(id)) {
+				checkedItems.delete(id);
+				setCheckedItems(checkedItems);
+				box.style.backgroundColor = "#fff";
+			}
+			return checkedItems;
+		};
+
+		return (
+			<div clssName="contStyle">
+				{formData.map((item) => (
+					<label key={item.id} className="innerBox">
+						<input
+							type="checkbox"
+							value={item.name}
+							onChange={(e) => checkHandler(e)}
+						/>
+						<div>{item.name}</div>
+					</label>
+				))}										
+			</div>
+		)
+	};
+
 
 	return (
 		<div className="container py-5 h-100">
@@ -176,57 +230,7 @@ export function Input() {
 								<div className="row">
 									<div className="col-12">
 										<p>원하는 운동 부위</p>
-										<div className="container">
-											<fieldset>
-												<div>
-													<input
-														type="checkbox"
-														id="chest"
-														name="chest"
-														checked={
-															formValue.sex === 0
-														}
-														value={0}
-														onChange={handleChange}
-													/>
-													<label htmlFor="chest">
-														가슴
-													</label>
-												</div>
-
-												<div>
-													<input
-														type="checkbox"
-														id="shoulder"
-														name="shoulder"
-														checked={
-															formValue.sex === 0
-														}
-														value={1}
-														onChange={handleChange}
-													/>
-													<label htmlFor="shoulder">
-														어깨
-													</label>
-												</div>
-
-												<div>
-													<input
-														type="checkbox"
-														id="lowerbody"
-														name="lowerbody"
-														checked={
-															formValue.sex === 0
-														}
-														value={2}
-														onChange={handleChange}
-													/>
-													<label htmlFor="lowerbody">
-														하체
-													</label>
-												</div>
-											</fieldset>
-										</div>
+										<Check></Check>
 									</div>
 								</div>
 
