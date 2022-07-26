@@ -27,7 +27,7 @@ export const Nav = observer(({ auth }) => {
 			>
 				logout
 			</Link>
-		);
+		); 
 	} else {
 		button = (
 			<Link to="/login" className="nav-link page-scroll">
@@ -35,7 +35,7 @@ export const Nav = observer(({ auth }) => {
 			</Link>
 		);
 	}
-
+ 
 	return (
 		<nav className="navbar navbar-expand-lg fixed-top navbar-dark">
 			<div className="container">
@@ -60,14 +60,14 @@ export const Nav = observer(({ auth }) => {
 								Home <span className="sr-only">(current)</span>
 							</a>
 						</li>
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<a
 								className="nav-link page-scroll"
 								href="#services"
 							>
 								Services
 							</a>
-						</li>
+						</li> */}
 
 						<li className="nav-item">{button}</li>
 						<li className="nav-item">{UserLink(auth.isAuth)}</li>
