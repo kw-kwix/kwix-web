@@ -10,7 +10,6 @@ const StartBtn = () => {
 			const email = localStorage.getItem("kwixUser");
 			await recommend(email);
 			navigate("/recommend"); 
-			// 서버 사용을 안할 시 위의 코드 3줄을 comment로 바꾸고 navigate("/input")로 해서 했음
 		} catch (error) {
 			alert(error.response.data.message);
 			navigate("/input");

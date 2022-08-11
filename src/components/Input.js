@@ -9,9 +9,11 @@ export function Input() {
 
 	const [formValue, setformValue] = React.useState({
 		age: 0,
-		sex: 1,
-		weight: 0,
+		sex: 0,
 		height: 0,
+		weight: 0,
+		bmi: 0,
+		during: 0
 	});
  
 	const handleSubmit = async (event) => {
@@ -31,8 +33,13 @@ export function Input() {
 		event.preventDefault()
 		console.log(event.target.value);
 		let value = event.target.value;
-		if (event.target.name === "sex") {
-			value = parseInt(event.target.value, 10);
+		switch (event.target.name) {
+			case "sex":
+				value = parseInt(event.target.value, 10);
+				break;
+			case "during":
+				value = parseInt(event.target.value, 10);
+				break;
 		}
 		setformValue({
 			...formValue,
@@ -40,7 +47,9 @@ export function Input() {
 		});
 		console.log(formValue);
 	};
-	
+
+
+	// 운동 부위
 	const Check = () => {
 		const formData=[
 			{id:0, name:"가슴"},
@@ -130,8 +139,8 @@ export function Input() {
 												type="radio"
 												name="sex"
 												id="maleGender"
-												checked={formValue.sex === 1}
-												value={1}
+												checked={formValue.sex === 0}
+												value={0}
 												onChange={handleChange}
 											/>
 											<label
@@ -148,8 +157,8 @@ export function Input() {
 												type="radio"
 												name="sex"
 												id="femaleGender"
-												checked={formValue.sex === 0}
-												value={0}
+												checked={formValue.sex === 1}
+												value={1}
 												onChange={handleChange}
 											/>
 											<label
@@ -205,24 +214,103 @@ export function Input() {
 								</div>
 
 								<div className="row">
-									<div className="col-12">
-										<p>운동경력</p>
-										<select className="select form-control-lg">
-											<option value="1" disabled>
-												운동 경력
-											</option>
-											<option value="2">
+									<div className="col-md-6 mb-4">
+										<div className="form-outline">
+											<label
+												className="form-label"
+												htmlFor="id_"
+											>
+												<p>BMI</p>
+												*BMI 계산기: {formValue.weight/((formValue.height*0.01)**2)}
+											</label>
+											<input
+												type="text"
+												id="id_"
+												className="form-control form-control-lg"
+												name="bmi"
+												value={formValue.bmi}
+												onChange={handleChange}
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-md-6 mb-4">
+										<p className="mb-2 pb-1">운동 경력 </p>
+
+										<div className="form-check form-check-inline">
+											<input
+												className="form-check-input"
+												type="radio"
+												name="during"
+												id="1below"
+												checked={formValue.during === 0}
+												value={0}
+												onChange={handleChange}
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="1below"
+											>
 												1개월 미만
-											</option>
-											<option value="3">
+											</label>
+										</div>
+
+										<div className="form-check form-check-inline">
+											<input
+												className="form-check-input"
+												type="radio"
+												name="during"
+												id="1above"
+												checked={formValue.during === 1}
+												value={1}
+												onChange={handleChange}
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="1above"
+											>
 												1개월 ~ 6개월
-											</option>
-											<option value="4">
+											</label>
+										</div>
+
+										<div className="form-check form-check-inline">
+											<input
+												className="form-check-input"
+												type="radio"
+												name="during"
+												id="6above"
+												checked={formValue.during === 2}
+												value={2}
+												onChange={handleChange}
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="6above"
+											>
 												6개월 ~ 1년
-											</option>
-											<option value="5">1년 이상</option>
-										</select>
-										<label className="form-label select-label"></label>
+											</label>
+										</div>
+
+										<div className="form-check form-check-inline">
+											<input
+												className="form-check-input"
+												type="radio"
+												name="during"
+												id="12above"
+												checked={formValue.during === 3}
+												value={3}
+												onChange={handleChange}
+											/>
+											<label
+												className="form-check-label"
+												htmlFor="12above"
+											>
+												1년 이상
+											</label>
+										</div>
+
 									</div>
 								</div>
 								<p></p>

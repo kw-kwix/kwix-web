@@ -211,30 +211,6 @@ export function SignUp() {
 									</div>
 								</div>
 
-								<div className="row">
-									<div className="col-12">
-										<p>운동 경력</p>
-										<select className="select form-control-lg">
-											<option value="1" disabled>
-												운동 경력
-											</option>
-											<option value="2">
-												1개월 미만
-											</option>
-											<option value="3">
-												1개얼 ~ 6개월
-											</option>
-											<option value="4">
-												6개월 ~ 1년
-											</option>
-											<option value="5">1년 이상</option>
-										</select>
-										<label className="form-label select-label">
-											{" "}
-										</label>
-									</div>
-								</div>
-
 								<div className="mt-4 pt-2">
 									<button
 										className="w-50 btn btn-lg btn-primary"

@@ -11,6 +11,9 @@ export const User = observer(({ auth }) => {
 		weight: 0,
 		sex: 0,
 		age: 0,
+		bmi: 0,
+		during: 0
+
 	});
 	React.useEffect(() => {
 		if (auth.isAuth) {
@@ -24,6 +27,7 @@ export const User = observer(({ auth }) => {
 				});
 		}
 	}, []);
+	
 	return (
 		<div>
 			<div className="container py-5 h-100">
@@ -107,10 +111,23 @@ export const User = observer(({ auth }) => {
 										<div className="col-md-6 mb-4">
 											<div className="card2">
 												<div className="card-header">
+													BMI
+												</div>
+												<div className="card-body">
+													{userInfo.bmi}
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="row">
+										<div className="col-md-6 mb-4">
+											<div className="card2">
+												<div className="card-header">
 													운동 경력
 												</div>
 												<div className="card-body">
-													1년 이상
+													{userInfo.during}
 												</div>
 											</div>
 										</div>
