@@ -1,7 +1,10 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import { user } from "../services/api";
+import { Link, useNavigate } from "react-router-dom";
 
 export function SignUp() {
+	const navigate = useNavigate();
 	const [formValue, setformValue] = React.useState({
 		name: "",
 		birthdayDate: "",
@@ -17,6 +20,7 @@ export function SignUp() {
 		try {
 			const res = await user.register(formValue);
 			alert(res.data.message);
+			navigate("/login");
 		} catch (error) {
 			alert(error.response.data.message);
 		}
