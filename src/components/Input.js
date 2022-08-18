@@ -48,52 +48,7 @@ export function Input() {
 		console.log(formValue);
 	};
 
-
-	// 운동 부위
-	const Check = () => {
-		const formData=[
-			{id:0, name:"가슴"},
-			{id:1, name:"어깨"},
-			{id:2, name:"하체"},
-		]
-
-		const [isChecked, setIsChecked] = useState(false);
-		const [checkedItems, setCheckedItems] = useState(new Set());
-
-		const checkHandler = ({ target }) => {
-			setIsChecked(!isChecked);
-			checkedItemHandler(target.parentNode, target.value, target.checked);
-		};
-
-		const checkedItemHandler = (box, id, isChecked) => {
-			if (isChecked) {
-				checkedItems.add(id);
-				setCheckedItems(checkedItems);
-				box.style.backgroundColor = "#F6CB44";
-			} else if (!isChecked && checkedItems.has(id)) {
-				checkedItems.delete(id);
-				setCheckedItems(checkedItems);
-				box.style.backgroundColor = "#fff";
-			}
-			return checkedItems;
-		};
-
-		return (
-			<div clssName="contStyle">
-				{formData.map((item) => (
-					<label key={item.id} className="innerBox">
-						<input
-							type="checkbox"
-							value={item.name}
-							onChange={(e) => checkHandler(e)}
-						/>
-						<div>{item.name}</div>
-					</label>
-				))}										
-			</div>
-		)
-	};
-
+	
 
 	return (
 		<div className="container py-5 h-100">
@@ -314,13 +269,6 @@ export function Input() {
 									</div>
 								</div>
 								<p></p>
-
-								<div className="row">
-									<div className="col-12">
-										<p>원하는 운동 부위</p>
-										<Check></Check>
-									</div>
-								</div>
 
 								<div className="mt-4 pt-2">
 									<button
