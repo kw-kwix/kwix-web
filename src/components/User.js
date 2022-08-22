@@ -1,8 +1,11 @@
 import { observer } from "mobx-react";
 import React from "react";
 import { user } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const User = observer(({ auth }) => {
+	const navigate = useNavigate();
+
 	const [userInfo, setUserInfo] = React.useState({
 		email: "",
 		name: "",
@@ -12,8 +15,7 @@ export const User = observer(({ auth }) => {
 		sex: 0,
 		age: 0,
 		bmi: 0,
-		during: 0
-
+		during: 0,
 	});
 	React.useEffect(() => {
 		if (auth.isAuth) {
@@ -27,7 +29,7 @@ export const User = observer(({ auth }) => {
 				});
 		}
 	}, []);
-	
+
 	return (
 		<div>
 			<div className="container py-5 h-100">
@@ -137,9 +139,8 @@ export const User = observer(({ auth }) => {
 										<button
 											className="w-50 btn btn-lg btn-primary"
 											type="button"
-											// onClick="location.href='recommend.html'"
+											onClick={() => navigate("/input")}
 										>
-											{" "}
 											내정보 수정
 										</button>
 									</div>

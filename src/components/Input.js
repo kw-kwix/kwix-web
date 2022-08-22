@@ -1,21 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { user } from "../services/api";
-import { useState } from 'react';
-
+import { useState } from "react";
 
 export function Input() {
 	const navigate = useNavigate();
 
-	const [formValue, setformValue] = React.useState({
+	const [formValue, setFormValue] = useState({
 		age: 0,
 		sex: 0,
 		height: 0,
 		weight: 0,
 		bmi: 0,
-		during: 0
+		during: 0,
+		fitbitClientId: ""
 	});
- 
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const email = localStorage.getItem("kwixUser");
@@ -25,12 +25,12 @@ export function Input() {
 			alert(res.data.message);
 			navigate("/recommend");
 		} catch (error) {
-			alert(error.response.data.message);
+			alert(error.response.data);
 		}
 	};
- 
+
 	const handleChange = (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		console.log(event.target.value);
 		let value = event.target.value;
 		switch (event.target.name) {
@@ -40,15 +40,26 @@ export function Input() {
 			case "during":
 				value = parseInt(event.target.value, 10);
 				break;
+			default:
 		}
-		setformValue({
+		setFormValue({
 			...formValue,
 			[event.target.name]: value,
 		});
+		console.log(value);
 		console.log(formValue);
 	};
 
-	
+	React.useEffect(() => {
+		const email = localStorage.getItem("kwixUser");
+		user.get(email)
+			.then((res) => {
+				setFormValue(res.data);
+			})
+			.catch((res) => {
+				console.error(res);
+			});
+	}, []);
 
 	return (
 		<div className="container py-5 h-100">
@@ -189,7 +200,26 @@ export function Input() {
 										</div>
 									</div>
 								</div>
-
+								<div className="row">
+									<div className="col-md-6 mb-4">
+										<div className="form-outline">
+											<label
+												className="form-label"
+												htmlFor="fitbitClientId"
+											>
+												Fitbit Client Id
+											</label>
+											<input
+												type="text"
+												id="fitbitClientId"
+												className="form-control form-control-lg"
+												name="fitbitClientId"
+												value={formValue.fitbitClientId}
+												onChange={handleChange}
+											/>
+										</div>
+									</div>
+								</div>
 								<div className="row">
 									<div className="col-md-6 mb-4">
 										<p className="mb-2 pb-1">운동 경력 </p>
@@ -265,10 +295,8 @@ export function Input() {
 												1년 이상
 											</label>
 										</div>
-
 									</div>
 								</div>
-								<p></p>
 
 								<div className="mt-4 pt-2">
 									<button
@@ -279,7 +307,7 @@ export function Input() {
 											to="/recommend"
 											className="text-white"
 										> */}
-											입력
+										입력
 										{/* </Link> */}
 									</button>
 								</div>
